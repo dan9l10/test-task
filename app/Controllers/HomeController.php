@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
 
     public function index(){
-        d('hello from'. self::class);
+        $this->view->render('index');
     }
 
 }
