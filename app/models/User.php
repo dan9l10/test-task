@@ -29,6 +29,20 @@ class User extends Model
         return $status;
     }
 
+    public function login($data){
+        if (!empty($data)){
+            $userSql = $this->db->prepare("SELECT * FROM USERS WHERE email = :email and pass = :pass");
+            $userSql->execute([
+                'email'=>$data['email'],
+                'pass'=>$data['pass'],
+                ]);
+            $dataUser = $userSql->fetch(PDO::FETCH_ASSOC);
+            $usersCollection = $this->fill($dataUser);
+            d($usersCollection);
+
+        }
+    }
+
     public function save(){
         $stmt  = $this->db->prepare("INSERT INTO users(email,pass) VALUES (:email,:pass)");
         $stmt->execute([

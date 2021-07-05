@@ -46,7 +46,13 @@ class AuthController extends Controller
     }
     public function login()
     {
-        echo "request";
+        $user = $this->model('user');
+        $data = [
+            'email'=>$this->request->email,
+            'pass'=>$this->request->password,
+        ];
+
+        $user->login($data);
     }
 
 }
