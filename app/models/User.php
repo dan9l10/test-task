@@ -29,6 +29,9 @@ class User extends Model
         return $status;
     }
 
+    /**
+     * @param $data
+     */
     public function login($data){
         if (!empty($data)){
             $userSql = $this->db->prepare("SELECT * FROM USERS WHERE email = :email and pass = :pass");
@@ -43,6 +46,9 @@ class User extends Model
         }
     }
 
+    /**
+     *
+     */
     public function save(){
         $stmt  = $this->db->prepare("INSERT INTO users(email,pass) VALUES (:email,:pass)");
         $stmt->execute([
