@@ -57,8 +57,9 @@ class Router
         if ($this->getMatches()){
             $pathController = 'App\\Controllers\\'.$this->params['controller'];
             $action = $this->params['action'];
+            $request = new Request();
             if(class_exists($pathController)){
-                $controllerObj = new $pathController($this->params);
+                $controllerObj = new $pathController($request,$this->params);
                 if(method_exists($controllerObj,$action)){
                     call_user_func([$controllerObj,$action],$this->params['params']);
                 }else{
@@ -68,6 +69,7 @@ class Router
                 throw new \Exception("Controller $pathController not found");
             }
         }else{
+			http_response_code(404);
             View::renderNf();
         }
     }

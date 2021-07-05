@@ -6,6 +6,5 @@ require_once ROOT.'debug.php';
 
 
 use App\Core\Router;
-
 $router = new Router();
 $router->run();
