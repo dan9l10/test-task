@@ -22,21 +22,27 @@ class AuthController extends Controller
 
     public function register()
     {
-        if(!empty($this->request)){
+        $user = $this->model('user');
+        $user->email = $this->request->email;
+        $user->pass = $this->request->password;
+        $user->save();
+
+
+        /*if(!empty($this->request)){
             $data = [
                 'email'=>$this->request->email,
                 'pass'=>$this->request->password,
                 'confirm_pass'=>$this->request->confirmPassword
             ];
             $user = $this->model('user');
-
             $status = $user->register($data);
+
             if ($status){
                 header('Location: /');
             }else{
                 header('Location: /register');
             }
-        }
+        }*/
     }
     public function login()
     {

@@ -8,12 +8,14 @@ use PDO;
 class User extends Model
 {
     public static $table = 'users';
+    public $email;
+    public $pass;
 
     public function register($data){
-        if($this->isRegisted($data['email'])){
-            return false;
-        }
         if (!empty($data)){
+            if($this->isRegisted($data['email'])){
+                return false;
+            }
             if ($data['pass'] === $data['confirm_pass']){
                 array_pop($data);
                 $status = $this->db->prepare('INSERT INTO users(email,pass) VALUES (:email,:pass)');
@@ -25,6 +27,14 @@ class User extends Model
             throw new \Exception('Data is empty');
         }
         return $status;
+    }
+
+    public function save(){
+        $stmt  = $this->db->prepare("INSERT INTO users(email,pass) VALUES (:email,:pass)");
+        $stmt->execute([
+            "email"=>$this->email,
+            "pass"=>$this->pass,
+            ]);
     }
 
 
