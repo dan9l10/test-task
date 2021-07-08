@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Core\Response;
 use App\Models\User;
 use http\Header;
 
@@ -12,11 +13,19 @@ class AuthController extends Controller
 {
     public function pageLogin()
     {
+        $userId = User::isLogin();
+        if($userId){
+            header('Location: /profile/'.$userId);
+        }
         $this->view->render('auth/login');
     }
 
     public function pageRegister()
     {
+        $userId = User::isLogin();
+        if($userId){
+            header('Location: /profile/'.$userId);
+        }
         $this->view->render('auth/register');
     }
 
@@ -25,8 +34,10 @@ class AuthController extends Controller
         $user = $this->model('user');
         $user->email = $this->request->email;
         $user->pass = $this->request->password;
-        $user->save();
-
+        $result = $user->save();
+        if (is_null($result)){
+            header('Location: /');
+        }
 
         /*if(!empty($this->request)){
             $data = [
@@ -52,7 +63,18 @@ class AuthController extends Controller
             'pass'=>$this->request->password,
         ];
 
-        $user->login($data);
+        $user = $user->login($data);
+        if (!empty($user)){
+            header('Location: /profile/'.$user->id);
+        }else{
+            header('Location: /');
+        }
+    }
+    public function logout()
+    {
+        $user = $this->model('user');
+        $user->logout();
+        header('Location: /register');
     }
 
 }

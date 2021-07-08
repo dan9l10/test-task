@@ -20,7 +20,6 @@ abstract class Model
      */
     protected function fill($attributes)
     {
-
         if(empty($attributes)){
             return null;
         }
@@ -31,8 +30,6 @@ abstract class Model
             }
         }
         return $this;
-
     }
-
 
 }

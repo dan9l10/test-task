@@ -6,4 +6,5 @@ return [
     'register' => 'auth/pageRegister',
     'register/attempt' => 'auth/register',
     'profile/([a-z0-9-_]+)' => 'profile/show/$1',
+    'logout' => 'auth/logout/',
 ];
