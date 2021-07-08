@@ -23,7 +23,7 @@ class AuthController extends Controller
         if($userId){
             header('Location: /profile/'.$userId);
         }
-        $this->view->render('auth/login');
+        $this->view->render('auth/login','',Session::flush('error'));
     }
 
     /**
@@ -42,8 +42,7 @@ class AuthController extends Controller
         }catch (AuthException $exception){
             $session = new Session();
             $session->set('error',[$exception->getMessage()]);
-            d($_SESSION);
-            header('Location: /');
+            header('Location: /login');
         }
     }
 
@@ -56,7 +55,7 @@ class AuthController extends Controller
         if($userId){
             header('Location: /profile/'.$userId);
         }
-        $this->view->render('auth/register');
+        $this->view->render('auth/register','',Session::flush('error'));
     }
 
     /**
@@ -64,6 +63,7 @@ class AuthController extends Controller
      */
     public function register()
     {
+        $session = new Session();
         $user = $this->model('user');
         $data = [
             'pass' => $this->request->password,
@@ -72,12 +72,11 @@ class AuthController extends Controller
         ];
         try {
             $result = $user->register($data);
-            header('Location: /');
+            $session->set('error',["Registration completed"]);
+            header('Location: /register');
         }catch (RegisterException $exception){
-            $session = new Session();
             $session->set('error',[$exception->getMessage()]);
-            d($_SESSION);
-            header('Location: /');
+            header('Location: /register');
         }
     }
 

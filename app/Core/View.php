@@ -11,11 +11,12 @@ class View
      * @param $name
      * @param array $data
      */
-    public function render($name, $data = []){
+    public function render($name, $data = [],$msg = []){
         $path = VIEWS.$name.'.php';
         if(file_exists($path)) {
             include_once $path;
         }
+
     }
 
     /**

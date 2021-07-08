@@ -6,5 +6,5 @@ interface SessionInterface{
      function set($key,$value = []);
      function get($key);
      function destroy();
-     function flush($key);
+    /* function flush($key);*/
 }

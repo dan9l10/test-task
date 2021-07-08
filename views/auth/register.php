@@ -5,6 +5,15 @@
         Home
     </a>
 </nav>
+<?php if ($msg):?>
+    <div class="alert">
+        <?php foreach ($msg as $message):?>
+            <p>
+                <?php echo $message?>
+            </p>
+        <?php endforeach;?>
+    </div>
+<?php endif; ?>
 <div class="container">
     <div class="card-body">
         <form method="post" action="/register/attempt">

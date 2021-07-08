@@ -36,8 +36,9 @@ class Session implements SessionInterface
         return null;
     }
 
-    public function flush($key)
+    public static function flush($key)
     {
+        $value = null;
         if(isset($_SESSION[$key])){
             $value = $_SESSION[$key];
         }
