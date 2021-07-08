@@ -22,6 +22,11 @@ class Controller
 
     }
 
+    /**
+     * Загружает указанную модель
+     * @param $model
+     * @return mixed|null
+     */
     protected function model($model){
         $modelName = 'App\\Models\\'.ucfirst($model);
         $modelObj = null;
