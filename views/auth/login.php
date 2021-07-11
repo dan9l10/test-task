@@ -1,10 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/2560px-Bootstrap_logo.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Home
-    </a>
-</nav>
+<?php include VIEWS.'/layouts/header.php'?>
 <?php if ($msg):?>
 <div class="alert">
     <?php foreach ($msg as $message):?>

@@ -85,6 +85,10 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        $userId = User::isLogin();
+        if($userId){
+            header('Location: /');
+        }
         $user = $this->model('user');
         $user->logout();
         header('Location: /');
